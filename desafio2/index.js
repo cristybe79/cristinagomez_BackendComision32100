@@ -12,8 +12,7 @@ class Contenedor{
         try {
             const dataJson = await fs.promises.readFile(`./${this.name}`, 'utf-8')
             const data = JSON.parse(dataJson);
-            console.log(data)
-            objeto.id = data[data.length - 1].id + 1
+            objeto.id = data[data.length - 1]?.id + 1 || 1;
             data.push(objeto)
             await fs.promises.writeFile(`./${this.name}`, JSON.stringify(data))
             return objeto.id
@@ -56,45 +55,45 @@ class Contenedor{
             console.log(error)
         }
     }
-    async deleteALL() {
-        const contenidoEliminado = []
+    async deleteAll() {
+        const contenidoEliminado = [{}]
         await fs.promises.writeFile(`${this.name}`, JSON.stringify(contenidoEliminado))
         return contenidoEliminado
     }
 }
 
-let contenedor = new Contenedor("pdto.json")
+let contenedor = new Contenedor("contenedor2.json")
 let objetoNuevo = {
     "id": 5,
     "title": "Celular",
     "price": 700
 }
 
-let obj1 = {
-    "id":1,
-    "title": 'TV',
-    "price": 1000,
-    "thumbnail": 'https://w7.pngwing.com/pngs/676/866/png-transparent-panasonic-led-backlit-lcd-high-definition-television-1080p-smart-tv-smart-tv-thumbnail.png',
-}
-contenedor.save(obj1).then(res => {
-    console.log(res)
-})
+// contenedor.save(objetoNuevo).then(res => {
+//     console.log(res)
+// })
 // contenedor.getById(7).then(res => {
-//     console.log(res)
-// })
-// contenedor.getAll().then(res => {
-//     console.log(res)
-// })
-// contenedor.deleteById(3).then(res => {
-//     console.log(res)
-// })
-// contenedor.deleteALL().then(res => {
-//     console.log(`borrado con exito`)
-//     console.log(res)
-// })
-
-const contenedor2 = new Contenedor("productos2.json");
-
+    //     console.log(res)
+    // })
+    // contenedor.getAll().then(res => {
+    //     console.log(res)
+    // })
+    // contenedor.deleteById(3).then(res => {
+    //     console.log(res)
+    // })
+    // contenedor.deleteALL().then(res => {
+    //     console.log(`borrado con exito`)
+    //     console.log(res)
+    // })
+                
+let contenedor2 = new Contenedor("productos2.json");
+                
+const obj1 = {
+    title: 'TV',
+    id:1,
+    price: 1000,
+    thumbnail: 'https://w7.pngwing.com/pngs/676/866/png-transparent-panasonic-led-backlit-lcd-high-definition-television-1080p-smart-tv-smart-tv-thumbnail.png',
+                }
 const obj2 = {
     title: 'Computadora',
     price: 2000,
@@ -105,29 +104,45 @@ const obj3 = {
     price: 3000,
     thumbnail: 'https://w7.pngwing.com/pngs/641/464/png-transparent-refrigerator-silver-mini-fridge-angle-household-kitchen-appliance-thumbnail.png',
 }
+async function save(obj) {
+    const res = await contenedor2.save(obj);
+    console.log(res);
+}
+async function getById(id) {
+    const res = await contenedor2.getById(id);
+    console.log(res);
+}
 
+async function getAll() {
+    const res = await contenedor2.getAll();
+    console.log(res);
+}
+async function deleteById(id) {
+    const res = await contenedor2.deleteById(id);
+    console.log(res);
+}
+async function deleteAll() {
+    const res = await contenedor2.deleteAll();
+    console.log(res);
+}
 
-// contenedor2.save(obj1).then(res => {
-//         console.log(res)
-// })
-// contenedor2.save(obj2).then(res => {
-//     console.log(res)
-// })
-// contenedor2.save(obj3).then(res => {
-//     console.log(res)
-// })
-// contenedor2.getById(7).then(res => {
-//     console.log(res)
-// })
-// contenedor2.getAll().then(res => {
-//     console.log(res)
-// })
-// contenedor.deleteById(3).then(res => {
-//     console.log(res)
-// })
-                
-// contenedor.deleteALL().then(res => {
-//     console.log(`borrado con exito`)
-//     console.log(res)
-// })
-
+const test = async () => {
+    console.log("Inicio de pruebas SAVE");
+    await save(obj1);
+    await save(obj2);
+    await save(obj3);
+    console.log("FIN de pruebas SAVE");
+    console.log("Inicio de prueba GETBYID (2)");
+    await getById(2);
+    console.log("FIN de prueba GETBYID");
+    console.log("Inicio de prueba DELETEBYID (1)");
+    await deleteById(1);
+    console.log("FIN de prueba DELETEBYID");
+    console.log("Inicio de prueba GETALL");
+    await getAll();
+    console.log("FIN de prueba GETALL");
+    console.log("Inicio de prueba DELETEALL");
+    await deleteAll();
+    console.log("FIN de prueba DELETEALL");
+}
+test();

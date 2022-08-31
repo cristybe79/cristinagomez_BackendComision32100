@@ -13,20 +13,5 @@
         "id": 3,
         "title": "Heladera",
         "price": 3000
-    },
-    {
-        "id": 4,
-        "title": "Estufa",
-        "price": 500
-    },
-    {
-        "id": 5,
-        "title": "Celular",
-        "price": 700
-    },
-    {
-        "id": 6,
-        "title": "Celular",
-        "price": 700
     }
 ]
