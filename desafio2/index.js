@@ -3,52 +3,56 @@ const fs = require('fs')
 
 
 
-class Contenedor{
-    constructor(name) {
-        this.name = name 
-        
+class Contenedor {
+    constructor(ruta) {
+        this.ruta = ruta
+
     }
+
     async save(objeto) {
-        try {
-            const dataJson = await fs.promises.readFile(`./${this.name}`, 'utf-8')
-            const data = JSON.parse(dataJson);
-            objeto.id = data[data.length - 1]?.id + 1 || 1;
-            data.push(objeto)
-            await fs.promises.writeFile(`./${this.name}`, JSON.stringify(data))
-            return objeto.id
+        const data = await this.getAll()
+        let nvoId
+        if (data.length == 0) {
+            nvoId = 1
+
+        } else {
+            nvoId = data[data.length - 1].id + 1
         }
-        catch(error) {
+        const nvoObjeto = { ...objeto, id: nvoId }
+        data.push(nvoObjeto)
+        try {
+            await fs.promises.writeFile(`./${this.ruta}`, JSON.stringify(data,null,2))
+            return nvoId
+        }
+        catch (error) {
             console.log(error)
         }
     }
 
     async getById(id) {
         try {
-            const data = JSON.parse(await fs.promises.readFile(`./${this.name}`, 'utf-8'))
-            let prodSelecionado = data.forEach(e => e.id === id)
-            return prodSelecionado ? prodSelecionado : null
+            const data = await this.getAll()
+            const prodSelecionado = data.find(e => e.id == id)
+            return prodSelecionado 
         }
         catch (error) {
-
             console.log(error)
         }
     }
     async getAll() {
-
         try {
-            const data = JSON.parse(await fs.promises.readFile(`./${this.name}`, 'utf-8'))
-            return data
+            const objs = await fs.promises.readFile(`./${this.ruta}`, 'utf-8')
+            return JSON.parse(objs)
+        } catch (error) {
+            return []
         }
-        catch (error) {
-            console.log(error)
-        }
+
     }
     async deleteById(id) {
         try {
-            const data = JSON.parse(await fs.promises.readFile(`./${this.name}`, 'utf-8'))
+            const data = await this.getAll()
             const filtrado = data.filter(e => e.id != id)
-            console.log(filtrado)
-            await fs.promises.writeFile(`./${this.name}`, JSON.stringify(filtrado))
+            await fs.promises.writeFile(`./${this.ruta}`, JSON.stringify(filtrado, null, 2))
             return filtrado
         }
         catch (error) {
@@ -56,93 +60,33 @@ class Contenedor{
         }
     }
     async deleteAll() {
-        const contenidoEliminado = [{}]
-        await fs.promises.writeFile(`${this.name}`, JSON.stringify(contenidoEliminado))
+        const contenidoEliminado = []
+        await fs.promises.writeFile(`./${this.ruta}`, JSON.stringify(contenidoEliminado, null, 2))
         return contenidoEliminado
     }
 }
 
-let contenedor = new Contenedor("contenedor2.json")
-let objetoNuevo = {
-    "id": 5,
-    "title": "Celular",
-    "price": 700
-}
+// let contenedor = new Contenedor("contenedor2.json")
+// let objetoNuevo = {
+//     "id": 5,
+//     "title": "Celular",
+//     "price": 700
+// }
 
 // contenedor.save(objetoNuevo).then(res => {
 //     console.log(res)
 // })
 // contenedor.getById(7).then(res => {
-    //     console.log(res)
-    // })
-    // contenedor.getAll().then(res => {
-    //     console.log(res)
-    // })
-    // contenedor.deleteById(3).then(res => {
-    //     console.log(res)
-    // })
-    // contenedor.deleteALL().then(res => {
-    //     console.log(`borrado con exito`)
-    //     console.log(res)
-    // })
-                
-let contenedor2 = new Contenedor("productos2.json");
-                
-const obj1 = {
-    title: 'TV',
-    id:1,
-    price: 1000,
-    thumbnail: 'https://w7.pngwing.com/pngs/676/866/png-transparent-panasonic-led-backlit-lcd-high-definition-television-1080p-smart-tv-smart-tv-thumbnail.png',
-                }
-const obj2 = {
-    title: 'Computadora',
-    price: 2000,
-    thumbnail: 'https://w7.pngwing.com/pngs/524/847/png-transparent-dell-vostro-laptop-desktop-computers-computer-desktop-pc-computer-network-electronics-computer-thumbnail.png',
-}
-const obj3 = {
-    title: 'Heladera',
-    price: 3000,
-    thumbnail: 'https://w7.pngwing.com/pngs/641/464/png-transparent-refrigerator-silver-mini-fridge-angle-household-kitchen-appliance-thumbnail.png',
-}
-async function save(obj) {
-    const res = await contenedor2.save(obj);
-    console.log(res);
-}
-async function getById(id) {
-    const res = await contenedor2.getById(id);
-    console.log(res);
-}
-
-async function getAll() {
-    const res = await contenedor2.getAll();
-    console.log(res);
-}
-async function deleteById(id) {
-    const res = await contenedor2.deleteById(id);
-    console.log(res);
-}
-async function deleteAll() {
-    const res = await contenedor2.deleteAll();
-    console.log(res);
-}
-
-const test = async () => {
-    console.log("Inicio de pruebas SAVE");
-    await save(obj1);
-    await save(obj2);
-    await save(obj3);
-    console.log("FIN de pruebas SAVE");
-    console.log("Inicio de prueba GETBYID (2)");
-    await getById(2);
-    console.log("FIN de prueba GETBYID");
-    console.log("Inicio de prueba DELETEBYID (1)");
-    await deleteById(1);
-    console.log("FIN de prueba DELETEBYID");
-    console.log("Inicio de prueba GETALL");
-    await getAll();
-    console.log("FIN de prueba GETALL");
-    console.log("Inicio de prueba DELETEALL");
-    await deleteAll();
-    console.log("FIN de prueba DELETEALL");
-}
-test();
+//     console.log(res)
+// })
+// contenedor.getAll().then(res => {
+//     console.log(res)
+// })
+// contenedor.deleteById(3).then(res => {
+//     console.log(res)
+// })
+// contenedor.deleteALL().then(res => {
+//     console.log(`borrado con exito`)
+//     console.log(res)
+// })
+module.exports = Contenedor         
