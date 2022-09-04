@@ -3,17 +3,17 @@
     "title": "Computadora",
     "price": 2000,
     "thumbnail": "https://w7.pngwing.com/pngs/524/847/png-transparent-dell-vostro-laptop-desktop-computers-computer-desktop-pc-computer-network-electronics-computer-thumbnail.png",
-    "id": 2
+    "id": 1
   },
   {
     "title": "Heladera",
     "price": 3000,
     "thumbnail": "https://w7.pngwing.com/pngs/641/464/png-transparent-refrigerator-silver-mini-fridge-angle-household-kitchen-appliance-thumbnail.png",
-    "id": 3
+    "id": 2
   },
   {
     "title": "TV",
-    "id": 4,
+    "id": 3,
     "price": 1000,
     "thumbnail": "https://w7.pngwing.com/pngs/676/866/png-transparent-panasonic-led-backlit-lcd-high-definition-television-1080p-smart-tv-smart-tv-thumbnail.png"
   }
