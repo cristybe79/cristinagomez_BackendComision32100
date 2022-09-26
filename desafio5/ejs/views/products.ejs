@@ -1,0 +1,29 @@
+<%- include('./layouts/index.ejs') %>
+    <%- include('./includes/nav.ejs') %>
+
+        <div class="container text-center mt-5">
+            <h2>PRODUCTOS</h2>
+            <div class="row row-cols-1 row-cols-md-3 g-4 my-4">
+                        <% products.forEach( prod=> { %>
+                            <div class="col">
+                                <div class="card" style="width: 15rem;">
+                                    <a class="text-decoration-none text-dark">
+                                        <img src=<%=prod.thumbnail %> class="card-img-top d-block m-auto" alt="<%=
+                                            prod.title %>" style="cursor:pointer"></a>
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <%= prod.title %>
+                                        </h5>
+                                        <p class="card-text">Price: $<%= prod.price %>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+        <% }) %>
+
+
+            </div>
+            <div>
+                <a href="/"><button class="btn btn-dark my-3">REGRESAR AL FORMULARIO</button></a>
+            </div>
+        </div>

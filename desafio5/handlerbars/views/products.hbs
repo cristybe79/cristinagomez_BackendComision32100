@@ -1,0 +1,18 @@
+{{>nav}}
+<h2>Productos</h2>
+<div class="container text-center">
+    {{#each products}}
+    <div class="card" style="width: 15rem;">
+    <img src={{thumbnail}}
+    class="card-img-top" alt={{id}}>
+    <div class="card-body">
+        <h5 class="card-title">{{title}}</h5>
+        <p class="card-text">Precio${{price}}/p>
+    </div>
+    </div>
+{{/each}}
+        <div>
+            <a href="/"><button class="btn btn-dark my-3">REGRESAR AL FORMULARIO</button></a>
+        </div>
+</div>
+<h3>fin</h3>

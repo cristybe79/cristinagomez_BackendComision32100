@@ -1,0 +1,29 @@
+<%- include('./layouts/index.ejs') %>
+<%- include('./includes/nav.ejs') %>
+
+<a type="button" href="/productos" class="btn btn-secondary">Ver Productos</a>
+<div class="container text-center">
+
+    <div class="col-5 bg-secondary p-2" style="--bs-bg-opacity: .5">
+        <h1>Formulario</h1>
+        <form action="/" method="post">
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-sm">Articulo</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm">
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-sm">Precio</span>
+                <input type="number" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm">
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-sm">url</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm">
+            </div>
+            <button type="submit" class="btn btn-secondary"> Agregar </button>
+        </form>
+    </div>
+</div>
+

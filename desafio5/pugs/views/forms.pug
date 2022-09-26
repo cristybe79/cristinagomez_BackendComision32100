@@ -1,0 +1,22 @@
+extends layouts/index.pug
+block content
+    div
+        div
+        a(href="/productos")
+            button(class="btn btn-dark mt-4") ver Productos
+    div(class="container text-center")
+    div
+        div(class="container text-center")
+            div
+                h2 FORMULARIO DE CARGA DE PRODUCTOS
+                form(action="/" method="POST")
+                    div(class="input-group input-group-sm mb-3")
+                        span(class="input-group-text" id="inputGroup-sizing-sm") Titulo
+                        input(type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm")
+                    div(class="input-group input-group-sm mb-3")
+                        span(class="input-group-text" id="inputGroup-sizing-sm") Precio
+                        input(type="number" required name="price" step=".01" class="form-control")
+                    div(class="input-group input-group-sm mb-3")
+                        span(class="input-group-text" id="inputGroup-sizing-sm") Imagen
+                        input(type="text" required name="thumbnail" class="form-control" placeholder="https://imagen.com/img.jpg")
+                    input(type="submit" value="Agregar" class="btn btn-success mt-3 mb-5")

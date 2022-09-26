@@ -1,0 +1,16 @@
+extends layouts/index.pug
+block content
+    div
+        a(href="/")
+            button(class="btn btn-dark my-3") REGRESAR AL FORMULARIO
+    div(class="container text-center mt-5")
+        h2 PRODUCTOS
+        div(class="row row-cols-1 row-cols-md-3 g-4 my-4")
+            each product in products
+                    div(class="col")
+                        div(class="card h-100")
+                            a(class="text-decoration-none text-dark" href=`/productos`)
+                                img(src=product.thumbnail class="card-img-top d-block m-auto" alt=product.title style="cursor:pointer")
+                            div(class="card-body")
+                                h5(class="card-title")=product.title
+                                p(class="card-text")=`Price: $${product.price}`
