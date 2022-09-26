@@ -8,7 +8,7 @@ block content
         div(class="row row-cols-1 row-cols-md-3 g-4 my-4")
             each product in products
                     div(class="col")
-                        div(class="card h-100")
+                        div(class="card" style="width: 15rem;")
                             a(class="text-decoration-none text-dark" href=`/productos`)
                                 img(src=product.thumbnail class="card-img-top d-block m-auto" alt=product.title style="cursor:pointer")
                             div(class="card-body")

@@ -7,8 +7,8 @@ block content
     div(class="container text-center")
     div
         div(class="container text-center")
-            div
-                h2 FORMULARIO DE CARGA DE PRODUCTOS
+            div(class="col-5 bg-secondary p-2" style="--bs-bg-opacity: .5")
+                h2 FORMULARIO
                 form(action="/" method="POST")
                     div(class="input-group input-group-sm mb-3")
                         span(class="input-group-text" id="inputGroup-sizing-sm") Titulo
@@ -19,4 +19,4 @@ block content
                     div(class="input-group input-group-sm mb-3")
                         span(class="input-group-text" id="inputGroup-sizing-sm") Imagen
                         input(type="text" required name="thumbnail" class="form-control" placeholder="https://imagen.com/img.jpg")
-                    input(type="submit" value="Agregar" class="btn btn-success mt-3 mb-5")
+                    input(type="submit" value="Agregar" class="btn btn-secondary mt-3 mb-5")
