@@ -1,22 +1,38 @@
 const {promises: fs} = require('fs')
-const mensajes = []
+
 
 class Mensajes{
-    constructor() {
-        this.mensaje = mensajes
+    constructor(ruta) {
+        this.ruta = ruta
     }
 
     async listarTodo() {
         try {
-            const objs = await fs.readFile(this.mensaje, 'utf-8')
+            const objs = await fs.readFile(this.ruta, 'utf-8')
             return JSON.parse(objs)
         } catch (error) {
             return []
         }
     }
     async guardarMensajes(msj) {
-        msj.id = this.mensaje[this.mensaje.length - 1]?.id + 1 || 1;
-        this.mensaje.push(msj)
+        const objs = await this.listarTodo()
+
+        let newId
+        if (objs.length == 0) {
+            newId = 1
+        } else {
+            newId = objs[objs.length - 1].id + 1
+        }
+
+        const newObj = { ...msj, id: newId }
+        objs.push(newObj)
+
+        try {
+            await fs.writeFile(this.ruta, JSON.stringify(objs, null, 2))
+            return newId
+        } catch (error) {
+            throw new Error(`Error al guardar: ${error}`)
+        }
     }
 
 }

@@ -15,7 +15,10 @@
 </head>
 
 <body>
-
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-5 justify-content-center px-5">
+    <h1 class="fw-bolder text-white text-center text-md-start">WebSockets</h1>
+    <hr class="vr text-white d-none d-md-block" style="height: 80px;">
+</nav>
     <div class="container mt-3">
         <div class="formulario">
             <h1>Ingrese Producto</h1>
@@ -23,20 +26,20 @@
 
             <form id="agregaProductos">
                 <!-- Campo nombre del producto -->
-                <div class="form-group">
-                    <label for="nombre">Nombre</label>
-                    <input id="nombre" class="form-control" type="text" name="title" required>
+                <div class="input-group input-group-sm mb-3">
+                    <span for="nombre" class="input-group-text" id="inputGroup-sizing-sm" >Titulo</span>
+                    <input id="nombre" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" type="text" name="title" required>
                 </div>
 
                 <!-- Campo precio del producto -->
-                <div class="form-group">
-                    <label for="precio">Precio</label>
-                    <input id="precio" class="form-control" type="number" step="0.01" name="price" required>
+                <div class="input-group input-group-sm mb-3">
+                    <label for="precio" class="input-group-text" id="inputGroup-sizing-sm">Precio </label>
+                    <input id="precio" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" type="number" step="0.01" name="price" required>
                 </div>
 
                 <!-- Campo url de la foto del producto -->
-                <div class="form-group">
-                    <label for="foto">Foto URL</label>
+                <div class="input-group input-group-sm mb-3">
+                    <label for="foto" class="input-group-text" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"id="inputGroup-sizing-sm">URL </label>
                     <input id="foto" class="form-control" type="url" name="thumbnail">
                 </div>
 
@@ -61,7 +64,7 @@
                 <div class="form-group">
                     <input disabled id="inputMensaje" type="text" class="form-control my-2 mr-2"
                         placeholder="Ingresá un mensaje...">
-                    <button disabled id="btnEnviar" type="submit" class="btn btn-primary my-2">Enviar!</button>
+                    <button disabled id="btnEnviar" type="submit" class="btn btn-secondary my-2">Enviar!</button>
                 </div>
             </form>
         </div>

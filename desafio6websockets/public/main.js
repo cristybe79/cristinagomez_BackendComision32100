@@ -18,29 +18,40 @@ agregaMensaje.addEventListener('submit', (e) => {
     socket.emit('nuevoMensaje', msg),
     console.log(msg)
     agregaMensaje.reset()
-    
+    inputMensaje.focus()
     
 })
 
 
-socket.on('mensaje', mensaje => {
-    renderizaMensaje(mensaje)
-
+socket.on('mensajes', mensaje => {
+    const html = renderizaMensaje(mensaje)
+    console.log(mensaje)
+    document.getElementById('mensajes').innerHTML = html
 })
 
-const renderizaMensaje = (data) => {
-    const html = data.map((data) => {
-        let textofragmento = `
-                    <div>
-                <b style="color:blue;">${data.autor}</b>
-                [<span style="color:brown;">${data.fyh}</span>] :
-                <i style="color:green;">${data.texto}</i>
-            </div>`;
-        return textofragmento;
-    }).join(`\n`)
-    document.getElementById('mensaje').innerHTML = html
+// const renderizaMensaje = (data) => {
+//     const html = data.map((mensaje) => {
+//         let textofragmento = `
+//                     <div>
+//                 <b style="color:blue;">${mensaje.autor}</b>
+//                 [<span style="color:brown;">${mensaje.fyh}</span>] :
+//                 <i style="color:green;">${mensaje.texto}</i>
+//             </div>`;
+//         return textofragmento;
+//     }).join(`\n`)
+//     document.getElementById('mensajes').innerHTML = html
+// }
+function renderizaMensaje(mensajes) {
+    return mensajes.map(mensaje => {
+        return (`
+            <div>
+                <b style="color:blue;">${mensaje.autor}</b>
+                [<span style="color:brown;">${mensaje.fyh}</span>] :
+                <i style="color:green;">${mensaje.texto}</i>
+            </div>
+        `)
+    }).join(" ");
 }
-
 inputUsername.addEventListener('input', () => {
     const hayEmail = inputUsername.value.length
     const hayTexto = inputMensaje.value.length

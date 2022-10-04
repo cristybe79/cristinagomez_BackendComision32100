@@ -22,10 +22,11 @@ const products = [
 class Productos {
 
     constructor() {
-        this.producto = products
+        this.producto = []
+        this.id=0
     }
     traeTodo() {
-        return {products : this.producto}
+        return [... this.producto]
     }
     traePorId(id) {
         const prodId = this.producto.find(prod => prod.id == id)
