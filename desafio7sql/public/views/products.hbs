@@ -1,0 +1,43 @@
+
+        {{!-- <div>
+            <div class="row row-cols-1 row-cols-md-3 g-4 my-4">
+                {{#each producto}}
+                <div class="col">
+                    <div class="card" style="width: 15rem;">
+                        <img src={{thumbnail}} class="card-img-top" alt={{id}}>
+                        <div class="card-body">
+                            <h5 class="card-title">{{title}}</h5>
+                            <p class="card-text">Precio${{price}}</p>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+        </div>
+        </div> --}}
+
+<style>
+    .table td,
+    .table th {
+        vertical-align: middle;
+    }
+</style>
+
+{{#if productos.length}}
+<h2>Lista de Productos</h2>
+<div class="table-responsive">
+    <table class="table table-secondary">
+        <tr>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Foto</th>
+        </tr>
+        {{#each productos}}
+        <tr>
+            <td>{{this.title}}</td>
+            <td>${{this.price}}</td>
+            <td><img width="50" src={{this.thumbnail}} alt="not found"></td>
+        </tr>
+        {{/each}}
+    </table>
+</div>
+{{/if}}
