@@ -184,9 +184,93 @@ db.productos.countDocuments()
 
 #punto 5 
 ##a agregar un producto a la collecion productos
-db.productos.insertOne({title:"AIRE ACONDICIONADO SURREY",price:4500,thumbnail:"url"})
+db.productos.insertOne({title:"AIRE ACONDICIONADO SURREY",precio:4500,thumbnail:"url"})
 
 ##REALIZAR UNA CONSULTA POR ORDEN ESPECIFICO
 
+
+# Listar productos menores a 1000
+
+db.productos.find({precio:{$lt:1000}})
+
+[
+  {
+    _id: ObjectId("635f15a627621da878ca5d70"),
+    title: 'SMART TV SAMSUNG 40',
+    precio: 430,
+    thumbnail: 'url'
+  },
+  {
+    _id: ObjectId("635f15a627621da878ca5d71"),
+    title: 'SMART TV SAMSUNG 50',
+    precio: 500,
+    thumbnail: 'url'
+  },
+  {
+    _id: ObjectId("635f15a627621da878ca5d72"),
+    title: 'SMART TV SAMSUNG 60',
+    precio: 600,
+    thumbnail: 'url'
+  },
+  {
+    _id: ObjectId("635f15a627621da878ca5d73"),
+    title: 'SMART TV LG 40',
+    precio: 420,
+    thumbnail: 'url'
+  },
+  {
+    _id: ObjectId("635f15a627621da878ca5d74"),
+    title: 'SMART TV LG 50',
+    precio: 490,
+    thumbnail: 'url'
+  },
+  {
+    _id: ObjectId("635f15a627621da878ca5d75"),
+    title: 'SMARTPHONE SAMSUNG A54',
+    precio: 300,
+    thumbnail: 'url'
+  },
+  {
+    _id: ObjectId("635f15a627621da878ca5d76"),
+    title: 'SMARTPHONE SAMSUNG A21',
+    precio: 200,
+    thumbnail: 'url'
+  },
+  {
+    _id: ObjectId("635f15a627621da878ca5d77"),
+    title: 'SMARTPHONE MOTOROLA G22',
+    precio: 250,
+    thumbnail: 'url'
+  }
+]
+
+## Listar productos entre 1000 a 3000
+
+db.productos.find({$and:[{precio:{$gte:1000}},{precio:{$lte:3000}}]})
+
+
+## Listar productos mayores a 3000
+
+db.productos.find({precio:{$gt:3000}});
+
+## Listar tercer producto mas barato
+
+db.productos.find({},{_id:0,title:1}).sort({precio:1}).limit(1).skip(2)
+
+## Agregar campo Stock a los productos
+
+db.productos.updateMany({},{$set:{stock:100}})
+
+## Cambia Stock a 0 de productos menores a 4000
+
+db.productos.updateMany({precio:{$gt:4000}},{$set:{stock:0}})
+
+## Borrar productos con precio menor a 1000
+
+db.productos.deleteMany({precio:{$lt:1000}})
+
+#6 Crea un usuario que solo pueda leer la base de datos
+
+db.createUser({user:"pepe",pwd:"asd456",roles:[{role:"read",db:"eccommerce"}]})
 
 
